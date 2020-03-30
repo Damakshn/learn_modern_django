@@ -4,3 +4,4 @@ __pycache__
 bootstrap*
 jquery*
 popper*
+media/**/*.jpg
