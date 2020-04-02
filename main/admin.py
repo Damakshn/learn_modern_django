@@ -10,6 +10,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ('in_stock',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
+    autocomplete_fields = ('tags', )
 
 
 class ProductTagAdmin(admin.ModelAdmin):
@@ -17,7 +18,6 @@ class ProductTagAdmin(admin.ModelAdmin):
     list_filter = ('active',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
-    autocomplete_fields = ('products', )
 
 
 class ProductImageAdmin(admin.ModelAdmin):
