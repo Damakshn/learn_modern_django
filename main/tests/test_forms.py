@@ -23,3 +23,22 @@ class TestForm(TestCase):
             'message': 'Boo!'
         })
         self.assertFalse(form.is_valid())
+
+    def teset_valid_signup_form_sends_email(self):
+        form = forms.UserCreationForm(
+            {
+                'email': 'user@domain.com',
+                'password1': 'qweqweqwe',
+                'password2': 'qweqweqwe'
+            }
+        )
+        self.assertTrue(form.is_valid())
+
+        with self.assertLogs('main.forms', level='INFO') as cm:
+            form.send_mail()
+        
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(
+            mail.outbox[0].subject, 'Welcome to BookTime'
+        )
+        self.assertGreaterEqual(len(cm.output), 1)
